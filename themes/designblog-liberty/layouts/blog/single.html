@@ -1,0 +1,48 @@
+{{ define "main" }}
+
+<section class="blog-post-main w3l-homeblock1">
+  <!--/blog-post-->
+  <article class="blog-content-inf pb-5">
+    <div class="container pb-lg-4">
+      <div class="single-post-image">
+        <div class="post-content">
+          
+        </div>
+        
+        <div class="single-post-content">
+
+        </div>
+
+        <!--/article tags-->
+        <div class="d-grid left-right mt-5 pb-md-5">
+          <div class="buttons-singles tags">
+            <h4>Tags :</h4>
+            <a href="#blog-tag">Culture</a>
+            <a href="#blog-tag">Sports</a>
+            <a href="#blog-tag">Technology</a>
+            <a href="#blog-tag">Health</a>
+          </div>
+        </div>
+        
+        <!--/social share-->
+        <div class="buttons-singles">
+          <h4>Share :</h4>
+          <a href="#blog-share"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+          <a href="#blog-share"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+          <a href="#blog-share"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+          <a href="#blog-share"><span class="fa fa-pinterest-p" aria-hidden=" true"></span></a>
+        </div>
+
+        {{- partial "author-card.html" . -}}
+        {{- partial "comments.html" . -}}
+        {{- partial "leave-comment-form.html" . -}}
+
+        <!-- related posts -->
+        {{- partial "more.html" . -}}
+
+      </div>
+    </div>
+  </article>
+      <!--//blog-post-->
+</section>
+{{ end }}
