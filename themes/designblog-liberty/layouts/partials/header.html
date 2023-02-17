@@ -2,7 +2,7 @@
 	<!--/nav-->
 	<nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
 		<div class="container">
-			<a class="navbar-brand" href="/">
+			<a class="navbar-brand" href="{{ site.BaseURL | absLangURL }}">
 				<span class="fa fa-pencil-square-o"></span>{{ .Site.Title }}</a>
         <!-- if logo is image enable this   
               <a class="navbar-brand" href="#index.html">
@@ -17,10 +17,11 @@
 			  </button>
 
 			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        {{ range .Site.Menus.main }}
+        {{ with .Site.Menus.main }}
           <ul class="navbar-nav ml-auto">
+            {{ range . }}
             <li class="nav-item active">
-              <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+              <a class="nav-link" href="{{ .URL }}">{{ .Name | humanize }}</a>
             </li>
             <li class="nav-item dropdown @@category__active">
 						  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -33,6 +34,7 @@
                 <a class="dropdown-item @@su__active" href="startup.html">Startup posts</a>
               </div>
 					  </li>
+            {{ end }}
           </ul>
         {{ end }}
 

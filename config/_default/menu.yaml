@@ -1,14 +1,14 @@
 main:
-  - identifier: about
-    name: About
-    url: /about
+  - identifier: categories
+    name: Temas
+    url: /temas
     weight: 100
-    post: Our facinating origins
+    post: El origen de este blog
   - identifier: contact
-    name: Contact
-    url: /contact
+    name: Contáctame
+    url: /contacto
     weight: 200
-    post: At your service
+    post: A su servicio
 footer: 
   - name: Privacy Policy 
     weight: 300 

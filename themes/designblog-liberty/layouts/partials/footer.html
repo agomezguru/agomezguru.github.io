@@ -3,15 +3,36 @@
   <div class="footer-content py-lg-5 py-4 text-center">
     <div class="container">
       <div class="copy-right">
-        <h6>© 2020 Design Blog . Made with <span class="fa fa-heart" aria-hidden="true"></span> </h6>
+        <h6>{{.Param "copyright" | markdownify}}; <span class="fa fa-heart" aria-hidden="true"></span>
+          {{.Param "stack" | markdownify}}</h6>
       </div>
       <ul class="author-icons mt-4">
-        <li><a class="facebook" href="#url"><span class="fa fa-facebook" aria-hidden="true"></span></a> </li>
-        <li><a class="twitter" href="#url"><span class="fa fa-twitter" aria-hidden="true"></span></a></li>
-        <li><a class="google" href="#url"><span class="fa fa-google-plus" aria-hidden="true"></span></a></li>
-        <li><a class="linkedin" href="#url"><span class="fa fa-linkedin" aria-hidden="true"></span></a></li>
-        <li><a class="github" href="#url"><span class="fa fa-github" aria-hidden="true"></span></a></li>
-        <li><a class="dribbble" href="#url"><span class="fa fa-dribbble" aria-hidden="true"></span></a></li>
+        {{with site.Author.facebook}}
+        <li>
+          <a class="facebook" href="{{.}}"><span class="fa fa-facebook" aria-hidden="true"></span></a> 
+        </li>
+      {{end}}
+      {{with site.Author.twitter}}
+        <li>
+          <a class="twitter" href="{{.}}"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+          </a>
+        </li>
+      {{end}}
+      {{with site.Author.linkedin}}
+      <li>
+        <a class="linkedin" href="{{.}}"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
+      </li>
+      {{end}}
+      {{with site.Author.github}}
+      <li>
+        <a class="github" href="{{.}}"><span class="fa fa-github" aria-hidden="true"></span></a>
+      </li>
+      {{end}}
+      {{with site.Author.email}}
+        <li>
+          <a href="mailto:{{.}}"><span class="fa fa-envelope" aria-hidden="true"></span></a>
+        </li>
+      {{end}}        
       </ul>
       <button onclick="topFunction()" id="movetop" title="Go to top">
         <span class="fa fa-angle-up"></span>
