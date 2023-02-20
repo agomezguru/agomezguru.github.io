@@ -1,0 +1,13 @@
+{{$img := .Resources.GetMatch "cover.*"}}
+{{ if $img }}
+<div class="sing-post-thumb mb-5 row pt-3">
+  <div class="col-sm-6">
+    <a href="#url"><img src='{{($img.Resize "410x webp").Permalink}}' width="410" loading="lazy"
+      class="radius-image img-fluid mb-5" alt="{{.Title}}"></a>
+  </div>
+  <div class="col-sm-6 mt-sm-0 mt-3">
+    <a href="#url"><img src='{{($img.Resize "410x webp").Permalink}}' width="410" loading="lazy"
+      class="img-fluid radius-image" alt="{{.Title}}"></a>
+  </div>
+</div>
+{{end}}

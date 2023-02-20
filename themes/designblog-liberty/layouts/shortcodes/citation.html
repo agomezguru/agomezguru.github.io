@@ -1,0 +1,7 @@
+<blockquote class="blockquote my-5">
+  <div class="icon-quote"><span class="fa fa-quote-left" aria-hidden="true"></span></div>
+  {{.Inner}}
+  {{ if len .Params | eq 1 }}
+  <footer class="blockquote-footer mt-3">{{.Get 0}}</footer>
+  {{ end }}
+</blockquote>
