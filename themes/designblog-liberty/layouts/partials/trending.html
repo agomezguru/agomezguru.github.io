@@ -1,0 +1,29 @@
+{{ $.Scratch.Set "index" 0 }}
+{{range first 4 .Pages }}
+  {{ $.Scratch.Set "index" (add ($.Scratch.Get "index") 1) }}
+  <div class="grids5-info">
+    <h4>0{{$.Scratch.Get "index"}}.</h4>
+    <div class="blog-info">
+        <a href="{{ .Permalink }}" class="blog-desc1">{{ .Title }}</a>
+        <div class="author align-items-center mt-2 mb-1">
+          <a href="author.html">{{.Params.author}}</a> in 
+          {{with .Params.tags}}
+            {{range .}} 
+            <a href="{{"/etiquetas/" | relLangURL}}{{. | urlize}}"> 
+              {{.}}
+            </a> 
+            {{end}}
+          {{end}}
+        </div>
+        <ul class="blog-meta">
+          <li class="meta-item blog-lesson">
+            <span class="meta-value">{{ .PublishDate.Format "January 2, 2006" }}</span>
+          </li>
+          <li class="meta-item blog-students">
+            <span class="meta-value">Lectura: {{ .ReadingTime }} {{ if eq .ReadingTime 1 }} min. 
+              {{ else }} mins. {{ end }}</span>
+          </li>
+        </ul>
+    </div>
+  </div>
+{{ end }}

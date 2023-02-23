@@ -1,17 +1,33 @@
 main:
-  - identifier: categories
+
+  - identifier: home
+    name: Inicio
+    url: /
+    weight: 100
+    post: Ir al inicio
+
+  - identifier: themes
     name: Temas
     url: /temas
-    weight: 100
+    weight: 200
     post: El origen de este blog
+
+  - identifier: more
+    name: ver más
+    url: /more
+    weight: 400
+    post: Ir al blog
+
   - identifier: contact
     name: Contáctame
     url: /contacto
-    weight: 200
+    weight: 500
     post: A su servicio
+
+    
 footer: 
   - name: Privacy Policy 
-    weight: 300 
+    weight: 100 
     url: /privacy 
   - name: Terms of Use 
     weight: 200 

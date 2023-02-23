@@ -1,3 +1,9 @@
 description: "Mi blog personal en GitHub"
 copyright: "&copy; 2023 GitHub Blog: Made with"
 stack: "Coded with [Hugo](https://www.nvinoticias.com); Designed by [**W3layouts**](https://w3layouts.com/)"
+errorPage:
+  title: Página no encontrada
+  warning: En este momento no puedo ubicar lo que buscas, probablemente mi blog está desconectado 
+    para mejorarlo aún más. Por favor vuelve más tarde y mira todas las novedades que tengo para tí.
+  returnURL: /
+  returnText: Regresar

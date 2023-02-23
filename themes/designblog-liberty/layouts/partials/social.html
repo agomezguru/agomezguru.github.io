@@ -1,0 +1,47 @@
+{{with $ }}
+  <ul class="author-icons mt-4">
+    {{with site.Author.facebook}}
+    <li>
+      <a class="facebook" href="{{.}}"><span class="fa fa-facebook" aria-hidden="true"></span></a> 
+    </li>
+  {{end}}
+  {{with site.Author.twitter}}
+    <li>
+      <a class="twitter" href="{{.}}"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+    </li>
+  {{end}}
+  {{with site.Author.linkedin}}
+  <li>
+    <a class="linkedin" href="{{.}}"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
+  </li>
+  {{end}}
+  {{with site.Author.github}}
+  <li>
+    <a class="github" href="{{.}}"><span class="fa fa-github" aria-hidden="true"></span></a>
+  </li>
+  {{end}}
+  {{with site.Author.email}}
+  <li>
+    <a href="mailto:{{.}}"><span class="fa fa-envelope" aria-hidden="true"></span></a>
+  </li>
+  {{end}}        
+  </ul>
+{{else}}
+
+  {{with site.Author.facebook}}
+  <a href="{{.}}"><span class="fa fa-facebook" aria-hidden="true"></span></a> 
+  {{end}}
+  {{with site.Author.twitter}}
+  <a href="{{.}}"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+  {{end}}
+  {{with site.Author.linkedin}}
+  <a href="{{.}}"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
+  {{end}}
+  {{with site.Author.github}}
+  <a href="{{.}}"><span class="fa fa-github" aria-hidden="true"></span></a>
+  {{end}}
+  {{with site.Author.email}}
+  <a href="mailto:{{.}}"><span class="fa fa-envelope" aria-hidden="true"></span></a>
+  {{end}}
+
+{{end}}

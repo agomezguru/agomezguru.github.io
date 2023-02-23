@@ -4,7 +4,7 @@
 		<div class="container">
 			<a class="navbar-brand" href="{{ site.BaseURL | absLangURL }}">
 				<span class="fa fa-pencil-square-o"></span>{{ .Site.Title }}</a>
-        <!-- if logo is image enable this   
+        <!-- if logo is image enable this
               <a class="navbar-brand" href="#index.html">
                 <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
               </a> -->
@@ -17,72 +17,83 @@
 			  </button>
 
 			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        {{ with .Site.Menus.main }}
+          {{ with .Site.Menus.main }}
           <ul class="navbar-nav ml-auto">
             {{ range . }}
-            <li class="nav-item active">
-              <a class="nav-link" href="{{ .URL }}">{{ .Name | humanize }}</a>
-            </li>
-            <li class="nav-item dropdown @@category__active">
-						  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							  Categories <span class="fa fa-angle-down"></span>
-						  </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item @@ls__active" href="lifestyle.html">Lifestyle posts</a>
-                <a class="dropdown-item @@cp__active" href="culture.html">Culture posts</a>
-                <a class="dropdown-item @@su__active" href="startup.html">Startup posts</a>
-              </div>
-					  </li>
+              {{ if .HasChildren }}
+                <li class="nav-item dropdown @@category__active">
+                  <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ .Name | humanize }} <span class="fa fa-angle-down"></span>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {{ range .Children}} 
+                    <a class="dropdown-item @@ls__active" href="{{ .URL }}">{{ .Name | humanize }}</a>
+                    {{ end }}
+                  </div>
+                </li>  
+              {{ else }}
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{ .URL }}">{{ .Name | humanize }}</a>
+                </li>
+              {{ end }}
             {{ end }}
           </ul>
-        {{ end }}
+          {{ end }}
 
-				<!--/search-right-->
-				<div class="search-right mt-lg-0 mt-2">
-					<a href="#search" title="search"><span class="fa fa-search" aria-hidden="true"></span></a>
-					<!-- search popup -->
-					<div id="search" class="pop-overlay">
-						<div class="popup">
-							<h3 class="hny-title two">Búsqueda</h3>
-							<form action="search-results.html" method="Get" class="search-box">
-								<input type="search" placeholder="Buscar entradas de blog" name="search"
-									required="required" autofocus="">
-								<button type="submit" class="btn">Buscar</button>
-							</form>
-							<a class="close" href="#close">×</a>
-						</div>
-					</div>
-					<!-- /search popup -->
-				</div>
-				<!--//search-right-->
-				<div class="header-author d-flex ml-lg-4 pl-2 mt-lg-0 mt-3">
-					<a class="img-circle img-circle-sm" href="author.html">
-						<img src="/assets/images/author.jpg" class="img-fluid" alt="...">
-					</a>
-					<div class="align-self ml-3">
-						<a href="author.html"><h5>Alexander</h5></a>
-						<span>Blog Writer</span>
-					</div>
-				</div>
-
-			</div>
-            <!-- toggle switch for light and dark theme -->
-            <div class="mobile-position">
-                <nav class="navigation">
-                    <div class="theme-switch-wrapper">
-                        <label class="theme-switch" for="checkbox">
-                            <input type="checkbox" id="checkbox">
-                            <div class="mode-container">
-                                <i class="gg-sun"></i>
-                                <i class="gg-moon"></i>
-                            </div>
-                        </label>
-                    </div>
-                </nav>
+          <!-- search-right-->
+          <div class="search-right mt-lg-0 mt-2">
+            <a href="#search" title="search"><span class="fa fa-search" aria-hidden="true"></span></a>
+            <!-- search popup -->
+            <div id="search" class="pop-overlay">
+              <div class="popup">
+                <h3 class="hny-title two">Búsqueda</h3>
+                <form action="search-results.html" method="Get" class="search-box">
+                  <input type="search" placeholder="Buscar entradas de blog" name="search"
+                    required="required" autofocus="">
+                  <button type="submit" class="btn">Buscar</button>
+                </form>
+                <a class="close" href="#close">×</a>
+              </div>
             </div>
-            <!-- //toggle switch for light and dark theme -->
+            <!-- /search popup -->
+          </div>
+          <!-- /search-right-->
+
+          <!-- author -->
+          {{ $author := resources.Get (printf "/images/%s.jpg" (.Params.author)) }}
+          {{ $alt_text := (printf "%s_author_icon" (.Params.author)) }}
+          
+          <div class="header-author d-flex ml-lg-4 pl-2 mt-lg-0 mt-3">
+            {{ with $author }}
+            <a class="img-circle img-circle-sm" href="author.html">
+              <img src='{{ ($author.Resize "60x webp").RelPermalink }}' class="img-fluid" alt="{{$alt_text}}">
+            </a>
+            {{end}}
+            <div class="align-self ml-3">
+              <a href="author.html"><h5>{{.Params.author}}</h5></a>
+              <span>Autor del Blog</span>
+            </div>
+          </div>
+          <!-- /author -->        
+			  </div>
+
+        <!-- toggle switch for light and dark theme -->
+        <div class="mobile-position">
+          <nav class="navigation">
+            <div class="theme-switch-wrapper">
+              <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox">
+                <div class="mode-container">
+                  <i class="gg-sun"></i>
+                  <i class="gg-moon"></i>
+                </div>
+              </label>
+            </div>
+          </nav>
+        </div>
+        <!-- /toggle switch for light and dark theme -->
 		</div>
 	</nav>
-	<!--//nav-->
+	<!--/nav-->
 </header>
