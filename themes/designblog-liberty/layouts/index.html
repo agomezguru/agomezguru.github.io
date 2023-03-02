@@ -1,3 +1,30 @@
 {{ define "main" }}
-{{ .Content }}
+<div class="w3l-homeblock1 py-5">
+  <div class="container pt-lg-5 pt-md-4">
+    <!-- block -->
+    {{ if $.Site.Params.homeBlocks.featured }}
+        {{- partial "home-featured-block.html" . -}}
+    {{ end }}
+    <!-- /block -->
+
+    <!-- block -->
+    {{ if $.Site.Params.homeBlocks.alone }}
+      {{- partial "home-alone-block.html" . -}}
+    {{ end }}
+    <!-- /block -->
+
+    <!-- block -->
+    {{ if $.Site.Params.homeBlocks.highlights }}
+      {{- partial "home-highligths-block.html" . -}}
+    {{ end }}
+    <!-- /block -->
+
+    <!-- block -->
+    {{ if $.Site.Params.homeBlocks.recent }}
+      {{- partial "home-recent-block.html" . -}}
+    {{ end }}
+    <!-- /block -->
+
+  </div>
+</div>
 {{ end }}

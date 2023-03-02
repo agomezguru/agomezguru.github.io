@@ -7,3 +7,11 @@ errorPage:
     para mejorarlo aún más. Por favor vuelve más tarde y mira todas las novedades que tengo para tí.
   returnURL: /
   returnText: Regresar
+
+homeBlocks:
+  featured: Artículos seleccionados
+  trendsUp: Lo más visto
+  alone: true
+  highlights: Today Highligths
+  recent: Escritos recientes
+  trendsDown: Tendencia

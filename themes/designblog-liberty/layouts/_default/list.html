@@ -4,7 +4,7 @@
     <!-- block -->
     <div class="row">
       <div class="col-lg-8 most-recent">
-        <h3 class="section-title-left">Lifestyle</h3>
+        <h3 class="section-title-left">{{ .Title }}</h3>
         <div class="row">
           {{ range .Paginator.Pages }}
             {{- partial "list-card.html" . -}}

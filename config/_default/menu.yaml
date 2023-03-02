@@ -1,16 +1,9 @@
 main:
-
   - identifier: home
     name: Inicio
     url: /
     weight: 100
     post: Ir al inicio
-
-  - identifier: themes
-    name: Temas
-    url: /temas
-    weight: 200
-    post: El origen de este blog
 
   - identifier: more
     name: ver más
@@ -24,7 +17,6 @@ main:
     weight: 500
     post: A su servicio
 
-    
 footer: 
   - name: Privacy Policy 
     weight: 100 

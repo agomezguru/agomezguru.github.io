@@ -66,13 +66,13 @@
           
           <div class="header-author d-flex ml-lg-4 pl-2 mt-lg-0 mt-3">
             {{ with $author }}
-            <a class="img-circle img-circle-sm" href="author.html">
+            <a class="img-circle img-circle-sm" href="{{ site.Author.url }}">
               <img src='{{ ($author.Resize "60x webp").RelPermalink }}' class="img-fluid" alt="{{$alt_text}}">
             </a>
             {{end}}
             <div class="align-self ml-3">
-              <a href="author.html"><h5>{{.Params.author}}</h5></a>
-              <span>Autor del Blog</span>
+              <a href="{{ site.Author.url }}"><h5>{{.Params.author}}</h5></a>
+              <span>{{ with $author }} Autor del Blog {{ end }}</span>
             </div>
           </div>
           <!-- /author -->        

@@ -1,0 +1,23 @@
+<section id="author" class="w3l-author py-5">
+  <div class="container py-md-3">
+    <div class="row align-items-center">
+      <div class="col-md-3 col-sm-4 col-7 order-first">
+        {{ $author := resources.Get (printf "/images/%s.jpg" (site.Author.name)) }}
+        {{ $alt_text := (printf "%s_author_card" (site.Author.name)) }}
+        {{ with $author }}
+          <div>
+            <img src='{{ ($author.Resize "205x webp").RelPermalink }}' alt="{{ $alt_text }}" class="rounded-circle img-fluid">
+          </div>
+        {{ end }}
+      </div>
+      <div class="col-md-9 col-sm-12 order-md-first mt-lg-0 mt-4">
+        
+        <h1 class="mb-4 title">$ head -n 15 {{site.Author.name}}.txt</h1>
+        <span class="category">{{site.Author.real_name}}</span>
+              <h1 class="mb-4 title"><span class="typed-text"></span><span class="cursor">&nbsp</span> </h1>
+              <p>{{site.Author.about}}</p>
+              {{ partial "social.html" true }}
+          </div>
+      </div>
+  </div>
+</section>

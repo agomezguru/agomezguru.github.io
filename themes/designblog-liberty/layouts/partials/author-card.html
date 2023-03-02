@@ -3,14 +3,16 @@
     <div class="col-sm-3 col-6">
       {{ $author := resources.Get (printf "/images/%s.jpg" (site.Author.name)) }}
       {{ $alt_text := (printf "%s_author_card" (site.Author.name)) }}
-      <div>
-        <img src='{{ ($author.Resize "170x webp").RelPermalink }}' alt="{{$alt_text}}" class="rounded-circle img-fluid">
-    </div>
+      {{ with $author }}
+        <div>
+          <img src='{{ ($author.Resize "170x webp").RelPermalink }}' alt="{{$alt_text}}" class="rounded-circle img-fluid">
+        </div>
+      {{ end }}
     </div>
     <div class="col-sm-9 mt-sm-0 mt-3">
       <h3 class="mb-3 title">{{site.Author.real_name}} (@{{site.Author.name}})</h3>
       <p>{{site.Author.about}}</p>
-      {{ partial "social.html" true }}
+      {{ partial "social.html" }}
     </div>
   </div>
 </div>

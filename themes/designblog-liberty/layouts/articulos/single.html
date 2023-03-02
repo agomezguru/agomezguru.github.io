@@ -10,14 +10,14 @@
 
       <div class="blog-post-img">
         {{ with $author }}
-        <a href="author.html"><img src='{{ ($author.Resize "60x webp").RelPermalink }}' alt="{{$alt_text}}" 
+        <a href="{{ site.Author.url }}"><img src='{{ ($author.Resize "60x webp").RelPermalink }}' alt="{{$alt_text}}" 
           class="rounded-circle img-fluid" />
         </a>
         {{ end }}
       </div>
       <div class="blog-post-info">
         <div class="author align-items-center mb-1">
-          <a href="author.html">Publicado: {{ .PublishDate.Format "January 2, 2006" }}</a> in 
+          <a href="{{ site.Author.url }}">Publicado: {{ .PublishDate.Format "January 2, 2006" }}</a> in 
           {{with .Params.tags}}
             {{range .}} 
             <a href="{{"/etiquetas/" | relLangURL}}{{. | urlize}}"> 

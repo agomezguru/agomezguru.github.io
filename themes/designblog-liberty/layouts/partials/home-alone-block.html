@@ -1,0 +1,38 @@
+{{ if $.Site.Params.homeBlocks.featured }}<div class="item mt-5 pt-4">
+{{ else }}<div class="item">
+{{ end }}
+  <div class="row">
+    {{ range .Paginator.Pages | last 1 }}
+    {{$img := .Resources.GetMatch "cover.*"}}
+    <div class="col-lg-6">
+      {{ if $img }}
+      <a href="{{ .Permalink }}">
+        <img class="card-img-bottom d-block radius-image" src='{{($img.Resize "530x webp").Permalink}}'
+            alt="Card image cap">
+      </a>
+      {{ end }}
+    </div>
+    <div class="col-lg-6 blog-details align-self mt-lg-0 mt-sm-5 mt-4">
+      <a href="{{ .Permalink }}" class="blog-desc-big">{{ .Title }}</a>
+      <p>{{ .Summary }}</p>
+      <div class="author align-items-center mt-4 mb-1">
+        <a href="{{ site.Author.url }}">{{.Params.author}}</a> in 
+        {{with .Params.tags}}
+          {{range .}} 
+            <a href='{{"/etiquetas/" | relLangURL}}{{. | urlize}}'>{{.}}</a>
+          {{ end }}
+        {{ end }}
+      </div>
+      <ul class="blog-meta">
+        <li class="meta-item blog-lesson">
+          <span class="meta-value">{{ .PublishDate.Format "January 2, 2006" }}</span>
+        </li>
+        <li class="meta-item blog-students">
+          <span class="meta-value">Lectura: {{ .ReadingTime }} {{ if eq .ReadingTime 1 }} min. 
+            {{ else }} mins. {{ end }}</span>
+        </li>
+      </ul>
+    </div>
+    {{ end }}
+  </div>
+</div>

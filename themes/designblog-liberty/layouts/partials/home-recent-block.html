@@ -1,0 +1,90 @@
+<div class="row mt-5 pt-5">
+  <div class="col-lg-9 most-recent">
+    <h3 class="section-title-left">{{ $.Site.Params.homeBlocks.recent }}</h3>
+    <div class="list-view ">
+      <div class="grids5-info img-block-mobile">
+        {{ range .Paginator.Pages | last 1 }}
+          {{- partial "card-recent.html" . -}}
+        {{ end }}
+      </div>
+      <div class="grids5-info img-block-mobile mt-5">
+        {{ range .Paginator.Pages | last 3 | first 2 }}
+          {{- partial "card-recent.html" . -}}
+        {{ end }}
+      </div>
+      <div class="row most-recent-inner my-5 py-lg-4">
+        <div class="col-md-6">
+          <div class="list-view list-view1">
+            <div class="grids5-info">
+              {{ range .Paginator.Pages | last 2 }}
+                {{- partial "card-highligths.html" . -}}
+              {{ end }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="list-view list-view1">
+            <div class="grids5-info">
+              {{ range .Paginator.Pages | last 4 | first 2 }}
+                {{- partial "card-highligths.html" . -}}
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grids5-info img-block-mobile mt-5">
+        {{ range .Paginator.Pages | last 6 | first 2 }}
+          {{- partial "card-recent.html" . -}}
+        {{ end }}
+      </div>
+      <!-- pagination -->
+      {{ $pag := $.Paginator }}
+      {{ if gt $pag.TotalPages 1 }}
+      <nav>
+        <div class="pagination-wrapper mt-5">
+          <ul class="page-pagination">
+            {{ $ellipsed := false }}
+            {{ $shouldEllipse := false }}
+            {{ range $pag.Pagers }}
+              {{ $right := sub .TotalPages .PageNumber }}
+              {{ $showNumber := or (le .PageNumber 4) (eq $right 0) }}
+              {{ $showNumber := or $showNumber (and (gt .PageNumber (sub $pag.PageNumber 3)) (lt .PageNumber (add $pag.PageNumber 3))) }}
+              {{ if $showNumber }}
+                {{ $ellipsed = false }}
+                {{ $shouldEllipse = false }}
+              {{ else }}
+                {{ $shouldEllipse = not $ellipsed }}
+                {{ $ellipsed = true }}
+              {{ end }} 
+              {{ if $showNumber }}
+                {{ if eq . $pag }}
+                <li><span aria-current="page" class="page-numbers current">{{ .PageNumber }}</span></li>
+                {{ else }}
+                <li><a class="page-numbers" href="{{ .URL }}">{{ .PageNumber }}</a></li>
+                {{ end }}
+              {{ else if $shouldEllipse }}
+                <li><span class="page-numbers">....</span></li>
+              {{ end }}
+            {{ end }}
+            {{ with $pag.HasNext}}
+              <li><a class="next" href="{{$pag.Next.URL}}"><span class="fa fa-angle-right"></span></a></li>
+            {{ else }}
+              <li><a class="next" href="{{$pag.Prev.URL}}"><span class="fa fa-angle-left"></span></a></li>
+            {{ end }}
+          </ul>
+        </div>
+      </nav>
+      {{ end }}
+      <!-- /pagination -->
+    </div>
+  </div>
+  {{ if $.Site.Params.homeBlocks.trendsDown }}
+  {{ $showTrends := $.Site.Params.homeBlocks.trendsDown }}
+  <div class="col-lg-3 trending mt-lg-0 mt-5 mb-lg-5">
+    <div class="pos-sticky">
+      <h3 class="section-title-left">{{ $showTrends }}</h3>
+      {{- partial "trending.html" . -}}
+    </div>
+  </div>
+  {{ end }}
+</div>

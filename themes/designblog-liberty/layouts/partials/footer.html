@@ -42,6 +42,16 @@
 
 <script src='{{ absURL "js/jquery-3.3.1.min.js" }}'></script>
 
+<!-- Optional JavaScript by about page -->
+{{ with  .Slug }}
+  {{if eq (.) ("/acerca_de") }}
+    {{ partial "about-js.html" (dict "First" site.Author.animation.first
+      "Middle" site.Author.animation.middle
+      "Last" site.Author.animation.last)
+    }}
+  {{ end }}
+{{ end }}
+
 <!-- disable body scroll which navbar is in active -->
 <script>
   $(function () {

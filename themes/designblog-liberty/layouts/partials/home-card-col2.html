@@ -1,0 +1,26 @@
+{{$img := .Resources.GetMatch "cover.*"}}
+{{ if $img }}
+  <a href="{{ .Permalink }}" class="d-block zoom"><img src='{{($img.Resize "x134 webp").Permalink}}' alt=""
+    class="img-fluid radius-image news-image"></a>
+{{ end }}
+<div class="blog-info align-self">
+  <a href="{{ .Permalink }}" class="blog-desc1">{{ .Title }}
+  </a>
+  <div class="author align-items-center mt-3 mb-1">
+    <a href="{{ site.Author.url }}">{{.Params.author}}</a> in
+    {{with .Params.tags}}
+      {{range .}} 
+        <a href='{{"/etiquetas/" | relLangURL}}{{. | urlize}}'>{{.}}</a>
+      {{ end }}
+    {{ end }}
+  </div>
+  <ul class="blog-meta">
+    <li class="meta-item blog-lesson">
+      <span class="meta-value">{{ .PublishDate.Format "January 2, 2006" }}</span>
+    </li>
+    <li class="meta-item blog-students">
+      <span class="meta-value">Lectura: {{ .ReadingTime }} {{ if eq .ReadingTime 1 }} min. 
+        {{ else }} mins. {{ end }}</span>
+    </li>
+  </ul>
+</div>
