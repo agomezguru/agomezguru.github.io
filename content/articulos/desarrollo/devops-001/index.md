@@ -4,7 +4,6 @@ title: DevOps ese viejo conocido
 tags: [DevOps]
 description: Entendiendo DevOps y su relación con las metodologías ágiles, el cómputo en nube y los contenedores Docker.
 summary: Entendiendo DevOps y su relación con las metodologías ágiles, el cómputo en nube y los contenedores Docker
-draft: true
 ---
 
 {{< bigcaps P >}}ara la mayoría de los desarrolladores en latinoamérica o al menos en el sur de mi país, México, el concepto de DevOps no es algo ajeno a nosotros. Desde siempre las actividades de desarrollo y operaciones se han hecho por la misma o mismas personas y no por desconocimiento, sino por falta de recursos.
