@@ -1,0 +1,5 @@
+{{ if len .Params | eq 1 }}
+  {{$img := .Get 0}}
+    <img src='{{($img.Resize "1150x webp").Permalink}}' width="1150" loading="lazy"
+      class="radius-image img-fluid mb-5" alt="">
+{{ end }}

@@ -1,0 +1,10 @@
+{{ with (.Page.Resources.Match "middle*") }}
+<div class="sing-post-thumb mb-5 row pt-3">
+  {{ range . }}
+  <div class="col-12">
+    <a href="#url"><img src='{{(.Resize "850x webp").Permalink}}' loading="lazy"
+      class="radius-image img-fluid" alt=""></a>
+  </div>
+  {{end}}
+</div>
+{{end}}

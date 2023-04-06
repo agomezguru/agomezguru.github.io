@@ -8,8 +8,6 @@ tags:
   - Terraform
 description: Amaizing description for web spiders.
 summary: This text appear only in the list's pages.
-categories: 
-  - general
 draft: true 
 --- 
 
