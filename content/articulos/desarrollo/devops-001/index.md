@@ -1,6 +1,7 @@
 ---
 author: agomezguru
 title: DevOps ese viejo conocido
+date: 2023-01-23T14:53:45-06:00
 tags: [DevOps]
 description: Entendiendo DevOps y su relación con las metodologías ágiles, el cómputo en nube y los contenedores Docker.
 summary: Entendiendo DevOps y su relación con las metodologías ágiles, el cómputo en nube y los contenedores Docker

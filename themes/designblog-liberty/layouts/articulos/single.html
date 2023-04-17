@@ -17,7 +17,7 @@
       </div>
       <div class="blog-post-info">
         <div class="author align-items-center mb-1">
-          <a href="{{ site.Author.url }}">Publicado: {{ .PublishDate.Format "January 2, 2006" }}</a> in 
+          <a href="{{ site.Author.url }}">Publicado: {{ .PublishDate.Format "January 2, 2006" }}</a> en 
           {{with .Params.tags}}
             {{range .}} 
             <a href="{{"/etiquetas/" | relLangURL}}{{. | urlize}}"> 

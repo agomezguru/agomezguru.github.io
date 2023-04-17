@@ -84,7 +84,7 @@ Ahora con tu cuenta de DockerHub recién creada [accede aquí.](https://labs.pla
 es indicativo de que el servicio está saturado, solo espera unos minutos y vuelve a intentarlo.
 {.mb-4}
 
-#### Algunos están los detalles de la configuración inicial  
+#### Algunos detalles de la configuración inicial
 {.m-0 .mb-4}
 
 {{< list >}}
@@ -634,5 +634,5 @@ La replicación maestro-esclavo mediante filas empleando logs binarios, es un m�
 {.blog-desc-big .m-0 .mt-4 .mb-4}
 {{< list >}}
 1. Figura 1. Trigger-based replication | From Wikimedia Commons, the free media repository
-1. Fugura 2. Log-based replication | From Wikimedia Commons, the free media repository
+1. Figura 2. Log-based replication | From Wikimedia Commons, the free media repository
 {{< /list >}}
