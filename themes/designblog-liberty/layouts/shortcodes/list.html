@@ -1,1 +1,2 @@
-<div class="text-list mb-4">{{.Inner | markdownify}}</div>
+{{ if len .Params | eq 0 }}<div class="text-list mb-4">{{.Inner | markdownify}}</div>{{ end }}
+{{ if len .Params | eq 1 }}<div class="text-list-{{.Get 0}} mb-4">{{.Inner | markdownify}}</div>{{ end }}

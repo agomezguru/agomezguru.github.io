@@ -28,17 +28,17 @@ Para entender cabalmente el problema que estamos intentando resolver con el [cas
 
 Algunas de las razones por las que un servidor puede experimentar tiempo de inactividad son:
 
-{{< list >}}
+{{< list gray>}}
 
-1. Reinicio del servidor: reiniciar un servidor puede requerir unos minutos de tiempo de inactividad porque el sistema debe apagarse, reiniciarse y luego reiniciar los procesos necesarios para responder a las solicitudes entrantes.
-1. Reinicio del software: reiniciar un proceso, como Apache en un servidor web, puede causar algunos segundos de tiempo de inactividad mientras se reinicia el proceso.
-1. Desconexión de la red: si un servidor se desconecta físicamente de una red, los sistemas de la red no podrán acceder a él.
-1. Interrupción de la red: si alguna parte de una red (incluida Internet) no funciona entre el servidor y el cliente, el cliente no podrá comunicarse con el servidor.
-1. Sobrecarga de tráfico: si un servidor recibe más tráfico del que puede manejar, no podrá responder a todas las solicitudes. Los usuarios pueden experimentar tiempo de inactividad hasta que el tráfico disminuya. Esto puede deberse a un pico en el tráfico o a un ataque DDoS (Denegación de Servicio).
-1. Falla de hardware: si falla un componente de hardware importante, como un HDD o una SSD, es posible que el servidor deje de funcionar.
-1. Falla de software: si un proceso en un servidor, como el servicio httpd (HTTP), deja de ejecutarse, hará que el servidor no responda a las solicitudes hasta que se reinicie el proceso.
-1. Corte de energía: si se corta la energía eléctrica y no hay energía de respaldo disponible (por ejemplo, un generador o UPS), los sistemas afectados estarán fuera de línea hasta que se restablezca la energía.
-1. Ataque de piratas informáticos: si un pirata informático obtiene el control de un servidor, puede impedir el acceso a los servicios necesarios y hacer que el servidor deje de responder.
+- **Reinicio del servidor:** reiniciar un servidor puede requerir unos minutos de tiempo de inactividad porque el sistema debe apagarse, reiniciarse y luego reiniciar los procesos necesarios para responder a las solicitudes entrantes.
+- **Reinicio del software:** reiniciar un proceso, como Apache en un servidor web, puede causar algunos segundos de tiempo de inactividad mientras se reinicia el proceso.
+- **Desconexión de la red:** si un servidor se desconecta físicamente de una red, los sistemas de la red no podrán acceder a él.
+- **Interrupción de la red:** si alguna parte de una red (incluida Internet) no funciona entre el servidor y el cliente, el cliente no podrá comunicarse con el servidor.
+- **Sobrecarga de tráfico:** si un servidor recibe más tráfico del que puede manejar, no podrá responder a todas las solicitudes. Los usuarios pueden experimentar tiempo de inactividad hasta que el tráfico disminuya. Esto puede deberse a un pico en el tráfico o a un ataque DDoS (Denegación de Servicio).
+- **Falla de hardware:** si falla un componente de hardware importante, como un HDD o una SSD, es posible que el servidor deje de funcionar.
+- **Falla de software:** si un proceso en un servidor, como el servicio httpd (HTTP), deja de ejecutarse, hará que el servidor no responda a las solicitudes hasta que se reinicie el proceso.
+- **Corte de energía:** si se corta la energía eléctrica y no hay energía de respaldo disponible (por ejemplo, un generador o UPS), los sistemas afectados estarán fuera de línea hasta que se restablezca la energía.
+- **Ataque de piratas informáticos:** si un pirata informático obtiene el control de un servidor, puede impedir el acceso a los servicios necesarios y hacer que el servidor deje de responder.
 
 {{< /list >}}
 
@@ -103,11 +103,11 @@ Advertencia: Lo primero que te recomiendo es nunca, nunca experimentar con softw
 
 {{< list >}}
 
-1. Tener una cuenta en la nube de tu preferencia
-1. Herramienta de Infraestructura como Código: [Terraform](https://www.terraform.io/)
-1. Servidor DNS público administrable como [Terraform Provider](https://registry.terraform.io/browse/providers)
-1. Dos instancias idénticas de cómputo en nube
-1. Un dominio web de tu propiedad
+- Tener una cuenta en la nube de tu preferencia
+- Herramienta de Infraestructura como Código: [Terraform](https://www.terraform.io/)
+- Servidor DNS público administrable como [Terraform Provider](https://registry.terraform.io/browse/providers)
+- Dos instancias idénticas de cómputo en nube
+- Un dominio web de tu propiedad
 {{< /list >}}
 
 Una de las grandes ventajas de [Terraform](https://www.terraform.io/) como herramienta [IaC](https://learn.microsoft.com/es-es/devops/deliver/what-is-infrastructure-as-code) es la modularización de tu infraestructura, yo tengo ya muy estandarizado el proceso con mis propios módulos para la creación de los propios proyectos, otro para el entorno de red y así sucesivamente para las instancias de cómputo, la CDN, etc.
@@ -122,62 +122,59 @@ Como sé que ya llevas algunos años puliendo tu infraestructura en nube, solo n
 Aquí lo que necesitamos es muy simple, solo dos IP's públicas accesibles desde la CDN. Para lograrlo de una manera simple, agregué una variable en el archivo de configuración del proyecto, el código se ve así:
 {.mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
+```tf {style=friendly}
+  # Set static IPs for the instances
+  variable "required_ips" {
+    type        = number
+    description = "Number of required IPs"
+    default     = 1
 
-# Set static IPs for the instances
-variable "required_ips" {
-  type        = number
-  description = "Number of required IPs"
-  default     = 1
-
-  validation {
-    condition     = var.required_ips > 0 && var.required_ips < 4
-    error_message = "Please provide a valid number of required public IPs. Options are: 1, 2 or 3."
-  } 
-}
+    validation {
+      condition     = var.required_ips > 0 && var.required_ips < 4
+      error_message = "Please provide a valid number of required public IPs. Options are: 1, 2 or 3."
+    } 
+  }
 ```
 
 Y en main.tf el código queda así:
 {.mt-4 .mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
+```tf {style=friendly}
+  # Generate a random name for external IP address
+  resource "random_string" "ext_address" {
+    count   = 3
+    length  = 4
+    upper   = false
+    numeric = true
+    lower   = true
+    special = false
+  }
 
-# Generate a random name for external IP address
-resource "random_string" "ext_address" {
-  count   = 3
-  length  = 4
-  upper   = false
-  numeric = true
-  lower   = true
-  special = false
-}
-
-# Create external IP for world accesss to server's 
-resource "google_compute_address" "external_ip_address" {
-  count        = var.required_ips
-  project      = var.project_id
-  region       = var.region
-  name         = "fixed-external-ip-${random_string.ext_address[count.index].result}"
-  address_type = "EXTERNAL"
-}
+  # Create external IP for world accesss to server's 
+  resource "google_compute_address" "external_ip_address" {
+    count        = var.required_ips
+    project      = var.project_id
+    region       = var.region
+    name         = "fixed-external-ip-${random_string.ext_address[count.index].result}"
+    address_type = "EXTERNAL"
+  }
 ```
 
 Así siempre dispongo de una, dos o tres IP's dependiendo el número de instancias a ejecutar en un momento dado. Dos para los servidores de producción Green/Blue y una extra para el servidor de CI y Staging cuando el proyecto se encuentra en sus fases iniciales.
 {.mt-4 .mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
+```tf {style=friendly}
+  output "external_ip_0" {
+    value = google_compute_address.external_ip_address[0].address
+  }
 
-output "external_ip_0" {
-  value = google_compute_address.external_ip_address[0].address
-}
+  output "external_ip_1" {
+    value = var.required_ips >= 2 ? google_compute_address.external_ip_address[1].address: "127.0.0.1"
+  }
 
-output "external_ip_1" {
-  value = var.required_ips >= 2 ? google_compute_address.external_ip_address[1].address: "127.0.0.1"
-}
-
-output "external_ip_2" {
-  value = var.required_ips == 3 ? google_compute_address.external_ip_address[2].address: "127.0.0.1"
-}
+  output "external_ip_2" {
+    value = var.required_ips == 3 ? google_compute_address.external_ip_address[2].address: "127.0.0.1"
+  }
 ```
 
 Las IP's públicas creadas por mi módulo las devuelvo a través del propio mecanismo de salida de Terraform mediante el archivo outputs.tf mostrado.
@@ -198,78 +195,74 @@ Como tengo por costumbre probar exhaustivamente cualquier idea que se me ocurra,
 Una vez clonado, lo primero hice fue alterar el código de la CDN para que apunte correctamente al servidor activo. Lo hice pasando una variable de tipo map a Terraform con todos los parámetros necesarios, al final mi código quedó así:
 {.mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
-
-variable "prod_enabled" {
-  type        = object(
-    {
+```tf {style=friendly}
+  variable "prod_enabled" {
+    type        = object(
+      {
+        .
+        .
+        .
+        # Actual IP public address
+        ip            = string
+        # Backend servers blue/green configuration
+        blue_svr      = bool
+        blue_svr_ip   = string
+        green_svr     = bool
+        green_svr_ip  = string
+        server_active = string
+    })
+    description = "Enable access to production environment with blue/green servers"
+    default     =  {
       .
       .
       .
-      # Actual IP public address
-      ip            = string
-      # Backend servers blue/green configuration
-      blue_svr      = bool
-      blue_svr_ip   = string
-      green_svr     = bool
-      green_svr_ip  = string
-      server_active = string
-  })
-  description = "Enable access to production environment with blue/green servers"
-  default     =  {
-    .
-    .
-    .
-    ip            = ""
-    blue_svr      = false
-    blue_svr_ip   = ""
-    green_svr     = false
-    green_svr_ip  = ""
-    server_active = ""
+      ip            = ""
+      blue_svr      = false
+      blue_svr_ip   = ""
+      green_svr     = false
+      green_svr_ip  = ""
+      server_active = ""
+    }
   }
-}
 ```
 
 Donde **ip** me permite controlar la IP del servidor que está actualmente activo, tal como se muestra en el siguiente trozo de código:
 {.mt-4 .mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
-
-resource "cloudflare_record" "backend_blue_access" {
-  count   = var.prod_enabled.blue_svr == true ? 1: 0
-  name    = var.cf_cdn.new_zone == true ? "backend-blue-access.${var.cf_cdn.zone_name}": "backend-blue-access.${var.prod_enabled.env_name}.${var.cf_cdn.zone_name}"
-  value   = var.prod_enabled.server_active == "blue" ? var.cf_cdn.new_zone == true ? var.cf_cdn.zone_name: "${var.prod_enabled.env_name}.${var.cf_cdn.zone_name}" : var.prod_enabled.blue_svr_ip
-  type    = var.prod_enabled.server_active == "blue" ? "CNAME" : "A"
-  proxied = false # This value is always false to get access.
-}
+```tf {style=friendly}
+  resource "cloudflare_record" "backend_blue_access" {
+    count   = var.prod_enabled.blue_svr == true ? 1: 0
+    name    = var.cf_cdn.new_zone == true ? "backend-blue-access.${var.cf_cdn.zone_name}": "backend-blue-access.${var.prod_enabled.env_name}.${var.cf_cdn.zone_name}"
+    value   = var.prod_enabled.server_active == "blue" ? var.cf_cdn.new_zone == true ? var.cf_cdn.zone_name: "${var.prod_enabled.env_name}.${var.cf_cdn.zone_name}" : var.prod_enabled.blue_svr_ip
+    type    = var.prod_enabled.server_active == "blue" ? "CNAME" : "A"
+    proxied = false # This value is always false to get access.
+  }
 ```
 
 El mismo código se repite idéntico para el servidor *Green* alterando los valores correspondientes:
 {.mt-4 .mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
-
-resource "cloudflare_record" "backend_green_access" {
-  count   = var.prod_enabled.green_svr == true ? 1: 0
-  name    = var.cf_cdn.new_zone == true ? "backend-green-access.${var.cf_cdn.zone_name}": "backend-green-access.${var.prod_enabled.env_name}.${var.cf_cdn.zone_name}"
-  value   = var.prod_enabled.server_active == "green" ? var.cf_cdn.new_zone == true ? var.cf_cdn.zone_name: "${var.prod_enabled.env_name}.${var.cf_cdn.zone_name}" : var.prod_enabled.green_svr_ip
-  type    = var.prod_enabled.server_active == "green" ? "CNAME" : "A"
-  proxied = false # This value is always false to get access.
-}
+```tf {style=friendly}
+  resource "cloudflare_record" "backend_green_access" {
+    count   = var.prod_enabled.green_svr == true ? 1: 0
+    name    = var.cf_cdn.new_zone == true ? "backend-green-access.${var.cf_cdn.zone_name}": "backend-green-access.${var.prod_enabled.env_name}.${var.cf_cdn.zone_name}"
+    value   = var.prod_enabled.server_active == "green" ? var.cf_cdn.new_zone == true ? var.cf_cdn.zone_name: "${var.prod_enabled.env_name}.${var.cf_cdn.zone_name}" : var.prod_enabled.green_svr_ip
+    type    = var.prod_enabled.server_active == "green" ? "CNAME" : "A"
+    proxied = false # This value is always false to get access.
+  }
 ```
 
 Si eres perspicaz habrás notado que en la línea 6 altero el tipo del registro DNS y lo cambio de CNAME a tipo A, esto también lo hago en el registro root del proyecto:
 {.mt-4 .mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
-
-resource "cloudflare_record" "root" {
-  count   = var.prod_enabled.on == true ? var.cf_cdn.new_zone == true ? 1: 0 : 0
-  name    = "@"
-  value   = var.prod_enabled.ip
-  type    = "A"
-  proxied = true
-}
+```tf {style=friendly}
+  resource "cloudflare_record" "root" {
+    count   = var.prod_enabled.on == true ? var.cf_cdn.new_zone == true ? 1: 0 : 0
+    name    = "@"
+    value   = var.prod_enabled.ip
+    type    = "A"
+    proxied = true
+  }
 ```
 
 Con ello garantizo que la CDN siempre apunte a la IP pública del servidor activo.
@@ -281,29 +274,26 @@ Con ello garantizo que la CDN siempre apunte a la IP pública del servidor activ
 Ahora solo resta controlar qué instancia está prendida en un determinado momento, ello lo logro con estas tres variables en el archivo de configuración de mi proyecto (defaults.auto.tfvars):
 {.mt-4 .mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
-
-blue_enabled            = true
-green_enabled           = true
-server_active           = "blue" # "green"
+```tf {style=friendly}
+  blue_enabled  = true
+  green_enabled = true
+  server_active = "blue" # "green"
 ```
 
 Ya dentro del archivo de configuración de las instancias las empleo de la siguiente manera:
 {.mt-4 .mb-4}
 
-```tf {linenos=table, linenostart=1, style=friendly}
-
-module "blue_server" {
-  count               = var.blue_enabled == true ? 1 : 0
-  .
-  .
-  .
-  ext_ip              = module.network.external_ip_0
-  .
-  .
-  .
+```tf {style=friendly}
+  module "blue_server" {
+    count   = var.blue_enabled == true ? 1 : 0
+    .
+    .
+    .
+    ext_ip  = module.network.external_ip_0
+    .
+    .
+    .
   }
-
 ```
 
 Mismo código para el servidor *Green*, solo cambia la variable *var.green_enabled*. El valor de la IP pública que verá la CDN lo obtengo del [módulo de red](#el-módulo-de-red).
@@ -318,21 +308,24 @@ Despliegues simples, rollback's rápidos y la fácil recuperación ante desastre
 ### Referencias
 {.blog-desc-big .m-0 .mb-4}
 
-[What is blue green deployment?](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment)
+{{< list >}}
 
-[Blue-Green Deployment](https://www.atatus.com/glossary/blue-green-deployment/)
+- [What is blue green deployment?](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment)
 
-[Introducción a los despliegues Azul-Verde](https://medium.com/devopslatam/introducción-a-los-despliegues-azul-verde-bb4055811279)
-{.mb-4}
+- [Blue-Green Deployment](https://www.atatus.com/glossary/blue-green-deployment/)
+
+- [Introducción a los despliegues Azul-Verde](https://medium.com/devopslatam/introducción-a-los-despliegues-azul-verde-bb4055811279)
+{{< /list >}}
 
 ### Créditos
 {.blog-desc-big .m-0 .mb-4}
 
-Figura de portada. Originalmente publicada en [Blue-Green Deployment](https://www.atatus.com/glossary/blue-green-deployment/)
+{{< list gray >}}
+- Figura de portada. Originalmente publicada en [Blue-Green Deployment](https://www.atatus.com/glossary/blue-green-deployment/)
 {.mb-4}
 
-Animación. Originalmente publicada en [www.redhat.com](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment)
+- Animación. Originalmente publicada en [www.redhat.com](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment)
 {.mb-4}
 
-Figura 1 y 2. Originalmente publicada en [Introducción a los despliegues Azul-Verde](https://medium.com/devopslatam/introducción-a-los-despliegues-azul-verde-bb4055811279)
-{.mb-4}
+- Figura 1 y 2. Originalmente publicada en [Introducción a los despliegues Azul-Verde](https://medium.com/devopslatam/introducción-a-los-despliegues-azul-verde-bb4055811279)
+{{< /list >}}
