@@ -10688,6 +10688,30 @@ p.alphabet {
   list-style-type: decimal;
   font-weight: 600; }
 
+.text-list ul li {
+  font-size: 18px;
+  line-height: 26px;
+  margin: 12px 0;
+  color: var(--heading-color);
+  list-style-type: disc;
+  font-weight: 600;
+  margin-left: 40px; }
+
+.text-list-gray ol li {
+  font-size: 16px;
+  line-height: 26px;
+  margin: 12px 0;
+  list-style-type: decimal;
+  font-family: 'Open Sans', sans-serif; }
+
+.text-list-gray ul li {
+  font-size: 16px;
+  line-height: 26px;
+  margin: 12px 0;
+  list-style-type: disc;
+  margin-left: 40px;
+  font-family: 'Open Sans', sans-serif; }
+  
 .single-post-content p a {
   font-weight: 600;
   color: var(--heading-color); }
