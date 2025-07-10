@@ -19,6 +19,6 @@
 
   <!-- Google Analytics G4 Tag -->
   {{ if not (in (string .Site.BaseURL) "localhost") }}
-    {{ template "_internal/google_analytics_async.html" . }}
+    {{template "_internal/google_analytics_async.html" . }}
   {{ end }}
 </head>
