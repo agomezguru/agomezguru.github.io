@@ -7,7 +7,7 @@
   <a href="{{ .Permalink }}" class="blog-desc1">{{ .Title }}
   </a>
   <div class="author align-items-center mt-3 mb-1">
-    <a href="{{ site.Author.url }}">{{.Params.author}}</a> in
+    <a href="{{ site.Params.author.url }}">{{.Params.author}}</a> in
     {{with .Params.tags}}
       {{range .}} 
         <a href='{{"/etiquetas/" | relLangURL}}{{. | urlize}}'>{{.}}</a>

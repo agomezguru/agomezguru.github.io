@@ -1,26 +1,26 @@
 {{with $ }}
   <ul class="author-icons mt-4">
-  {{with site.Author.facebook}}
+  {{with site.Params.author.facebook}}
     <li>
       <a class="facebook" href="{{.}}"><span class="fa fa-facebook" aria-hidden="true"></span></a> 
     </li>
   {{end}}
-  {{with site.Author.twitter}}
+  {{with site.Params.author.twitter}}
     <li>
       <a class="twitter" href="{{.}}"><span class="fa fa-twitter" aria-hidden="true"></span></a>
     </li>
   {{end}}
-  {{with site.Author.linkedin}}
+  {{with site.Params.author.linkedin}}
   <li>
     <a class="linkedin" href="{{.}}"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
   </li>
   {{end}}
-  {{with site.Author.github}}
+  {{with site.Params.author.github}}
   <li>
     <a class="github" href="{{.}}"><span class="fa fa-github" aria-hidden="true"></span></a>
   </li>
   {{end}}
-  {{with site.Author.email}}
+  {{with site.Params.author.email}}
   <li>
     <a href="mailto:{{.}}"><span class="fa fa-envelope" aria-hidden="true"></span></a>
   </li>
@@ -28,19 +28,19 @@
   </ul>
 {{else}}
 
-  {{with site.Author.facebook}}
+  {{with site.Params.author.facebook}}
   <a href="{{.}}"><span class="fa fa-facebook" aria-hidden="true"></span></a> 
   {{end}}
-  {{with site.Author.twitter}}
+  {{with site.Params.author.twitter}}
   <a href="{{.}}"><span class="fa fa-twitter" aria-hidden="true"></span></a>
   {{end}}
-  {{with site.Author.linkedin}}
+  {{with site.Params.author.linkedin}}
   <a href="{{.}}"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
   {{end}}
-  {{with site.Author.github}}
+  {{with site.Params.author.github}}
   <a href="{{.}}"><span class="fa fa-github" aria-hidden="true"></span></a>
   {{end}}
-  {{with site.Author.email}}
+  {{with site.Params.author.email}}
   <a href="mailto:{{.}}"><span class="fa fa-envelope" aria-hidden="true"></span></a>
   {{end}}
 

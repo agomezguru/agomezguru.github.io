@@ -3,7 +3,8 @@ languageCode: es
 title: GitHub Blog
 theme: "designblog-liberty"
 enableEmoji: true
-paginate: 4
+pagination:
+  pagerSize: 4
 
 markup:
   goldmark:

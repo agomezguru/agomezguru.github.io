@@ -15,3 +15,21 @@ homeBlocks:
   highlights: Today Highligths
   recent: Escritos recientes
   trendsDown: Tendencia
+
+author:
+  name: agomezguru
+  real_name: Alejandro Gómez Lagunas
+  location: Oaxaca, Méx.
+  phone: +52 (951) 228-6616
+  linkedin: https://www.linkedin.com/in/alejandro-g%C3%B3mez-lagunas-12748212/
+  github: https://github.com/agomezguru
+  email: alagunas@coati.com.mx
+  url: /acerca_de
+  about:
+    Apasionado por las grabaciones musicales de calidad excelsa (entusiasta de los equipos de audio de alta
+    gama), me encanta caminar al aire libre o en una playa aislada, me gusta nadar, amo la poesía,
+    la literatura y una buena conversación.
+  animation:
+    first: Ing. Mecánico Eléctrico de Profesión
+    middle: Programador por accidente, ahora con maestría
+    last: Maestro en Administración de Empresas por necesidad

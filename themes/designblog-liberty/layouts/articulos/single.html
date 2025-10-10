@@ -5,19 +5,19 @@
   <div class="container mt-md-3">
     <h3 class="blog-desc-big text-center mb-4">{{with .Title}}{{.}}{{end}}</h3>
     <div class="blog-post-align">
-      {{ $author := resources.Get (printf "/images/%s.jpg" (.Params.author)) }}
-      {{ $alt_text := (printf "%s_blog_image" (.Params.author)) }}
+      {{ $author := resources.Get (printf "/images/%s.jpg" (site.Params.author.name)) }}
+      {{ $alt_text := (printf "%s_blog_image" (site.Params.author.name)) }}
 
       <div class="blog-post-img">
         {{ with $author }}
-        <a href="{{ site.Author.url }}"><img src='{{ ($author.Resize "60x webp").RelPermalink }}' alt="{{$alt_text}}" 
+        <a href="{{ site.Params.author.url }}"><img src='{{ ($author.Resize "60x webp").RelPermalink }}' alt="{{$alt_text}}" 
           class="rounded-circle img-fluid" />
         </a>
         {{ end }}
       </div>
       <div class="blog-post-info">
         <div class="author align-items-center mb-1">
-          <a href="{{ site.Author.url }}">Publicado: {{ .PublishDate.Format "January 2, 2006" }}</a> en 
+          <a href="{{ site.Params.author.url }}">Publicado: {{ .PublishDate.Format "January 2, 2006" }}</a> en 
           {{with .Params.tags}}
             {{range .}} 
             <a href="{{"/etiquetas/" | relLangURL}}{{. | urlize}}"> 

@@ -43,11 +43,11 @@
 <script src='{{ absURL "js/jquery-3.3.1.min.js" }}'></script>
 
 <!-- Optional JavaScript by about page -->
-{{ with  .Slug }}
-  {{if eq (.) ("/acerca_de") }}
-    {{ partial "about-js.html" (dict "First" site.Author.animation.first
-      "Middle" site.Author.animation.middle
-      "Last" site.Author.animation.last)
+{{ with .File }}
+  {{ if eq .ContentBaseName "about-me" }}
+    {{ partial "about-js.html" (dict "First" site.Params.author.animation.first
+      "Middle" site.Params.author.animation.middle
+      "Last" site.Params.author.animation.last)
     }}
   {{ end }}
 {{ end }}
