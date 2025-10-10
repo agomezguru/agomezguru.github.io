@@ -4,7 +4,7 @@
     <div class="col-lg-6 col-md-6 mt-md-0 mt-5">
       <div class="list-view list-view1">
         <div class="grids5-info">
-          {{ range .Paginator.Pages | last 2 }}
+          {{ range where .Paginator.Pages ".Params.exclude_from_lists" "!=" true | last 2 }}
             {{- partial "card-highligths.html" . -}}
           {{ end }}
         </div>
@@ -14,7 +14,7 @@
     <div class="col-lg-6 col-md-6 mt-md-0 mt-5">
       <div class="list-view list-view1">
         <div class="grids5-info">
-          {{ range .Paginator.Pages | last 4 | first 2 }}
+          {{ range where .Paginator.Pages ".Params.exclude_from_lists" "!=" true | last 4 | first 2 }}
             {{- partial "card-highligths.html" . -}}
           {{ end }}
         </div>

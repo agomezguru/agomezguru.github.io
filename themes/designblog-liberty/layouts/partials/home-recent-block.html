@@ -3,12 +3,12 @@
     <h3 class="section-title-left">{{ $.Site.Params.homeBlocks.recent }}</h3>
     <div class="list-view ">
       <div class="grids5-info img-block-mobile">
-        {{ range .Paginator.Pages | last 1 }}
+        {{ range where .Paginator.Pages ".Params.exclude_from_lists" "!=" true | last 1 }}
           {{- partial "card-recent.html" . -}}
         {{ end }}
       </div>
       <div class="grids5-info img-block-mobile mt-5">
-        {{ range .Paginator.Pages | last 3 | first 2 }}
+        {{ range where .Paginator.Pages ".Params.exclude_from_lists" "!=" true | last 3 | first 2 }}
           {{- partial "card-recent.html" . -}}
         {{ end }}
       </div>
@@ -16,7 +16,7 @@
         <div class="col-md-6">
           <div class="list-view list-view1">
             <div class="grids5-info">
-              {{ range .Paginator.Pages | last 2 }}
+              {{ range where .Paginator.Pages ".Params.exclude_from_lists" "!=" true | last 2 }}
                 {{- partial "card-highligths.html" . -}}
               {{ end }}
             </div>
@@ -25,7 +25,7 @@
         <div class="col-md-6">
           <div class="list-view list-view1">
             <div class="grids5-info">
-              {{ range .Paginator.Pages | last 4 | first 2 }}
+              {{ range where .Paginator.Pages ".Params.exclude_from_lists" "!=" true | last 4 | first 2 }}
                 {{- partial "card-highligths.html" . -}}
               {{ end }}
             </div>
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="grids5-info img-block-mobile mt-5">
-        {{ range .Paginator.Pages | last 6 | first 2 }}
+        {{ range where .Paginator.Pages ".Params.exclude_from_lists" "!=" true | last 6 | first 2 }}
           {{- partial "card-recent.html" . -}}
         {{ end }}
       </div>

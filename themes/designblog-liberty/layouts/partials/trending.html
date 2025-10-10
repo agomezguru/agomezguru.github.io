@@ -1,12 +1,12 @@
 {{ $.Scratch.Set "index" 0 }}
-{{range first 4 .Pages }}
+{{range first 4 (where .Pages ".Params.exclude_from_lists" "!=" true) }}
   {{ $.Scratch.Set "index" (add ($.Scratch.Get "index") 1) }}
   <div class="grids5-info">
     <h4>0{{$.Scratch.Get "index"}}.</h4>
     <div class="blog-info">
         <a href="{{ .Permalink }}" class="blog-desc1">{{ .Title }}</a>
         <div class="author align-items-center mt-2 mb-1">
-          <a href="{{ site.Params.author.url }}">{{.Params.author}}</a> in 
+          <a href="{{ site.Params.author.url | relLangURL }}">{{.Params.author}}</a> in 
           {{with .Params.tags}}
             {{range .}} 
             <a href="{{"/etiquetas/" | relLangURL}}{{. | urlize}}"> 

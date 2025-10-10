@@ -11,3 +11,6 @@ markup:
     parser:
       attribute:
         block: true
+    renderer:
+      # Permite que Hugo renderice HTML que no es seguro, como los iframes.
+      unsafe: true
